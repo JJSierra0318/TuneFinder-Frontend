@@ -1,25 +1,29 @@
 import Home from "./components/Home";
-import { useState } from 'react'
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
+
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 
 const App = () => {
 
-  const [page, setPage] = useState('home')
+  const padding = {
+    padding: 5
+  }
 
   return (
-    <div className="App">
-      <div className="Menu">
-        <button onClick={() => setPage('home')}>Home</button>
-        <button>Favorites</button>
-        <button onClick={() => setPage('login')}>Log In</button>
-        <button onClick={() => setPage('signup')}>Sign Up</button>
-        <button>User</button>
+    <Router>
+      <div>
+        <Link style={padding} to="/home">home</Link>
+        <Link style={padding} to="/login">login</Link>
+        <Link style={padding} to="/signup">sign up</Link>
       </div>
-      <Home show={page === 'home'}/>
-      <LogIn show={page === 'login'}/>
-      <SignUp show={page === 'signup'}/>
-    </div>
+
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </Router>
   );
 }
 

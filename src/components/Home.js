@@ -1,7 +1,5 @@
 const Home = (props) => {
 
-  if (!props.show) return null
-
   return (
     <div className="Home">
         <button>Find by genre</button>

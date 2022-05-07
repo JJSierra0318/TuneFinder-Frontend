@@ -5,8 +5,6 @@ const LogIn = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  if (!props.show) return null
-
   const onSubmit = (event) => {
     event.preventDefault()
     console.log(username, password)
