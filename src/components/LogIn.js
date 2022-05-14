@@ -1,7 +1,28 @@
+import { useState, useEffect } from "react"
+
 const LogIn = (props) => {
 
+  useEffect(() => {
+    const hash = window.location.hash
+    let token = window.localStorage.getItem('token')
+
+    if (!token && hash) {
+      let urlParams = new URLSearchParams(window.location.hash.replace('#','?'))
+      let token = urlParams.get('access_token')
+
+      window.location.hash = ''
+      window.localStorage.setItem('token',token)
+      setToken(token)
+
+      console.log(token)
+    }
+
+  }, [])
+
+  const [token, setToken] = useState('')
+
   const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
-  const REDIRECT_URI = "http://localhost:3000"
+  const REDIRECT_URI = "http://localhost:3000/login"
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
   const RESPONSE_TYPE = 'token'
 
