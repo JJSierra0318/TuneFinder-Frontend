@@ -1,37 +1,19 @@
-import { useState } from "react"
-
 const LogIn = (props) => {
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
-  const onSubmit = (event) => {
-    event.preventDefault()
-    console.log(username, password)
-    setUsername('')
-    setPassword('')
-  }
+  const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
+  const REDIRECT_URI = "http://localhost:3000"
+  const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
+  const RESPONSE_TYPE = 'token'
 
   return (
     <div className="LogIn">
       <h1>Log In</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <input 
-            type="text" 
-            placeholder="username"
-            value={username}
-            onChange={({ target }) => {setUsername(target.value)}}/>
-        </div>
-        <div>
-          <input 
-            type="password" 
-            placeholder="password"
-            value={password}
-            onChange={({ target }) => {setPassword(target.value)}}/>
-        </div>
-        <button type="submit">Enter</button>
-      </form>
+      
+      <a 
+        href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
+        Login to Spotify
+      </a>
+
     </div>
   )
 }
