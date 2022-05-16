@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { userLogin } from "../reducers/tokenReducer"
 
 const LogIn = (props) => {
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
+
     const hash = window.location.hash
     let token = window.localStorage.getItem('token')
+    console.log(token)
 
     if (!token && hash) {
       let urlParams = new URLSearchParams(window.location.hash.replace('#','?'))
@@ -12,10 +18,12 @@ const LogIn = (props) => {
 
       window.location.hash = ''
       window.localStorage.setItem('token',token)
-      setToken(token)
 
       console.log(token)
     }
+
+    setToken(token)
+    dispatch(userLogin(token))
 
   }, [])
 
