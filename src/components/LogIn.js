@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { userLogin } from "../reducers/tokenReducer"
 
@@ -22,12 +22,11 @@ const LogIn = (props) => {
       console.log(token)
     }
 
-    setToken(token)
     dispatch(userLogin(token))
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const [token, setToken] = useState('')
 
   const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
   const REDIRECT_URI = "http://localhost:3000/home"
