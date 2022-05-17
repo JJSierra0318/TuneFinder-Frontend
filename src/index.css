@@ -55,3 +55,21 @@ a:hover {
   height: 50px;
   width: 100px;
 }
+
+
+
+.login {
+  margin-top: 175px;
+  color: white;
+  font-size: 30px;
+}
+.login div {
+  margin-top: 70px;
+  width: 250px;
+  height: 40px;
+  background-color: #1DB954;
+  border-radius: 50px;
+}
+.login a:hover {
+  color: white
+}

@@ -31,14 +31,16 @@ const LogIn = (props) => {
   const RESPONSE_TYPE = 'token'
 
   return (
-    <div className="LogIn">
-      <h1>Log In</h1>
-      
-      <a 
-        href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
-        Login to Spotify
-      </a>
-
+    <div className="login">
+      <center>
+        <h1>Log In to Continue</h1>
+        <div>
+          <a 
+            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
+            Login with Spotify
+          </a>
+        </div>
+      </center>
     </div>
   )
 }
