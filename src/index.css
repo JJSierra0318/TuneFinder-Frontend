@@ -1,0 +1,57 @@
+html {
+  padding: 0;
+  background-color: #121212;
+}
+
+#right {
+  float: right
+}
+
+a {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: #1DB954
+}
+
+
+
+.menu {
+  color: white;
+  padding-top: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+  height: 50px;
+}
+.menu button {
+  background: none;
+  border: none;
+}
+
+
+
+.home {
+  background-color: darkseagreen;
+  height: 500px;
+  margin: 0px 100px;
+  float: center;
+  
+}
+.home div {
+  background-color: #121212;
+  border: 1px solid black;
+  color: white;
+  border-radius: 10px;
+  width: 20%;
+  height: 300px;
+  margin: 70px;
+  display: inline-block;
+  
+}
+.home button {
+  height: 50px;
+  width: 100px;
+}

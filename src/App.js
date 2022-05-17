@@ -20,7 +20,7 @@ const App = () => {
         {token
         ? <div className="menu">
             <button><Link style={padding} to="/home">home</Link></button>
-            <button onClick={() => {
+            <button id='right' onClick={() => {
               dispatch(userLogout())
               window.localStorage.setItem('token', '')}}>
                 <Link style={padding} to='/'>Logout</Link>
