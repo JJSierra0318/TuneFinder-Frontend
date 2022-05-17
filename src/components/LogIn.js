@@ -30,7 +30,7 @@ const LogIn = (props) => {
   const [token, setToken] = useState('')
 
   const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
-  const REDIRECT_URI = "http://localhost:3000/login"
+  const REDIRECT_URI = "http://localhost:3000/home"
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
   const RESPONSE_TYPE = 'token'
 
