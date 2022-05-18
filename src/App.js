@@ -1,12 +1,14 @@
+import { useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 
 import LogIn from "./components/LogIn";
 import Home from "./components/Home";
-import { setUser } from './reducers/userReducer';
-import { useEffect } from 'react';
 import Menu from './components/Menu';
+import { setUser } from './reducers/userReducer';
+import loginService from './services/login'
+
 
 const getUser = async (token, dispatch) => {
   const {data} = await axios({
@@ -19,7 +21,8 @@ const getUser = async (token, dispatch) => {
   })
   
   dispatch(setUser(data))
-  axios.post('/api/login', data)
+  const a = loginService.login(data)
+  console.log(a)
   return data
 }
 
