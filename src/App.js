@@ -21,8 +21,7 @@ const getUser = async (token, dispatch) => {
   })
   
   dispatch(setUser(data))
-  const a = loginService.login(data)
-  console.log(a)
+  await loginService.login(data)
   return data
 }
 
@@ -39,6 +38,8 @@ const App = () => {
 
   }, [token, user, dispatch])
 
+  window.onbeforeunload = () => localStorage.clear()
+
   return (
     <Router>
       <div>
@@ -50,6 +51,7 @@ const App = () => {
 
       <Routes>
         <Route path="/home" element={<Home />} />
+        <Route path='/' element={<></>} />
       </Routes>
       {token
       ? <p>You're logged in</p>

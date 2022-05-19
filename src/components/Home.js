@@ -1,4 +1,9 @@
+import { useSelector } from "react-redux"
+
 const Home = (props) => {
+
+  const loggedIn = useSelector(state => state.token)
+  if (!loggedIn) return null
 
   return (
     <div className="home">
