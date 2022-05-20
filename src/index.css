@@ -9,7 +9,7 @@ body {
 }
 
 hr {
-  width: 80%;
+  width: 75%;
   margin-left: 150px;
   margin-top: 0px;
 }
@@ -152,19 +152,25 @@ a:hover {
   margin-left: 20px;
   margin-bottom: 40px;
   width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 .artistList img {
   float: left;
   border-radius: 100px;
   height: 120px;
   width: 120px;
 }
-
 .artistList h2 {
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 150px;
   float: inline-end;
-  font-size: 30px;
+  font-size: 25px;
+}
+.artistList p {
+  margin-left: 150px;
+  font-size: 15px;
+}
+.artistList em {
+  opacity: 60%;
 }

@@ -4,7 +4,6 @@ import { useSelector } from "react-redux"
 import User from '../images/User.png'
 
 const ArtistList = (artists) => {
-  console.log(artists)
   return (
     <div>
       {artists.artists.map(artist => <div className='artistList' key={artist.id}>
@@ -13,6 +12,10 @@ const ArtistList = (artists) => {
           : <img src={User} alt='Artist Logo'/>}
         <h2>{artist.name}</h2>
         <hr></hr>
+        {artist.genres.length > 0
+          ? <p><strong>Genres: </strong>{artist.genres.map(genre => <em>{genre} / </em>)}</p>
+          : null}
+        
       </div>)}
     </div>
   )
