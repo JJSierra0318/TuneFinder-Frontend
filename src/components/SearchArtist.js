@@ -1,13 +1,42 @@
+import axios from "axios"
+import { useState } from "react"
 import { useSelector } from "react-redux"
 
+const ArtistList = (artists) => {
+  console.log(artists)
+  return (
+    <div>
+      {artists.artists.map(artist => <div>
+        <h2>{artist.name}</h2>
+      </div>)}
+    </div>
+  )
+}
+
 const SearchArtist = () => {
+
+  const [search, setSearch] = useState('')
+  const [artists, setArtists] = useState('')
 
   const loggedIn = useSelector(state => state.token)
   if (!loggedIn) return null
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    console.log('submited')
+    const {data} = await axios({
+      method: 'get',
+      url: 'https://api.spotify.com/v1/search',
+    withCredentials: false,
+    headers: {
+      Authorization: `Bearer ${loggedIn}`
+      },
+      params: {
+        q: search,
+        type: 'artist'
+      }
+    })
+    console.log(data)
+    setArtists(data.artists.items)
   }
 
   return (
@@ -19,11 +48,15 @@ const SearchArtist = () => {
           <div className="input">
           <input
             placeholder="Artist name"
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button type="submit">Search</button>
           </div>
         </form>
         </center>
+        {artists 
+        ? <ArtistList artists={artists}/>
+        : null}
       </div>
     </div>
   )
