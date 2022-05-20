@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import Menu from './components/Menu';
 import { setUser } from './reducers/userReducer';
 import loginService from './services/login'
+import SearchArtist from './components/SearchArtist';
 
 
 const getUser = async (token, dispatch) => {
@@ -51,11 +52,9 @@ const App = () => {
 
       <Routes>
         <Route path="/home" element={<Home />} />
+        <Route path='search-artist' element={<SearchArtist />} />
         <Route path='/' element={<></>} />
       </Routes>
-      {token
-      ? <p>You're logged in</p>
-      : null}
     </Router>
   );
 }

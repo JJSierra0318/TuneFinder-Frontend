@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const Home = (props) => {
 
@@ -14,7 +15,7 @@ const Home = (props) => {
           </div>
         <div>
           <h1>Search by artist</h1>
-          <button>Search</button>
+          <Link to='/search-artist'><button>Search</button></Link>
           </div>
         </center>
       </div>
