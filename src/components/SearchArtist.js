@@ -1,13 +1,18 @@
 import axios from "axios"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import User from '../images/User.png'
 
 const ArtistList = (artists) => {
   console.log(artists)
   return (
     <div>
-      {artists.artists.map(artist => <div>
+      {artists.artists.map(artist => <div className='artistList' key={artist.id}>
+        {artist.images.length > 0
+          ? <img src={artist.images[2].url} alt='Artist Logo'/>
+          : <img src={User} alt='Artist Logo'/>}
         <h2>{artist.name}</h2>
+        <hr></hr>
       </div>)}
     </div>
   )
@@ -35,7 +40,6 @@ const SearchArtist = () => {
         type: 'artist'
       }
     })
-    console.log(data)
     setArtists(data.artists.items)
   }
 

@@ -8,6 +8,12 @@ body {
   padding: 0px;
 }
 
+hr {
+  width: 80%;
+  margin-left: 150px;
+  margin-top: 0px;
+}
+
 .ainput {
   margin: 30px;
   width: 1000px;
@@ -138,4 +144,27 @@ a:hover {
   top: 5px;
   background: none;
   border: none;
+}
+
+.artistList {
+  display: inline-block;
+  padding: 20px;
+  margin-left: 20px;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.artistList img {
+  float: left;
+  border-radius: 100px;
+  height: 120px;
+  width: 120px;
+}
+
+.artistList h2 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 150px;
+  float: inline-end;
+  font-size: 30px;
 }
