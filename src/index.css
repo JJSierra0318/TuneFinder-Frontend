@@ -174,3 +174,35 @@ a:hover {
 .artistList em {
   opacity: 60%;
 }
+
+.generalInfo {
+  display: inline-block;
+  width: 100%;
+  padding: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.generalInfo img {
+  float: left;
+  height: 250px;
+  width: 250px;
+  border-radius: 200px;
+}
+.generalInfo h2 {
+  font-size: 100px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 300px;
+}
+.generalInfo hr {
+  margin-top: 0px;
+  margin-left: 300px;
+  margin-bottom: 35px;
+  width: 60%;
+}
+.generalInfo p {
+  margin-left: 300px;
+  width: 60%;
+}
+.generalInfo em {
+  opacity: 60%;
+}
