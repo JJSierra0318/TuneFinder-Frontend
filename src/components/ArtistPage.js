@@ -18,7 +18,6 @@ const TrackList = (props) => {
         Authorization: `Bearer ${token}`
       }
     })
-    console.log(data)
     setTracks(data)
   }
 
@@ -26,6 +25,8 @@ const TrackList = (props) => {
     fetchTracks(props.id)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.id])
+
+  if (!tracks) return null
 
   return(
     <div>
