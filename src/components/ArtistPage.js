@@ -3,10 +3,12 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import User from '../images/User.png'
+import Note from '../images/Note.png'
 
 const ArtistPage = () => {
 
   const [artist, setArtist] = useState('')
+  const [albums, setAlbums] = useState('')
   const token = useSelector(state => state.token)
 
   const fetchArtist = async () => {
@@ -22,17 +24,32 @@ const ArtistPage = () => {
     setArtist(data)
   }
 
+  const fetchTracks = async () => {
+    const {data} = await axios({
+      method: 'get',
+      url: `https://api.spotify.com/v1/artists/${id}/albums`,
+    withCredentials: false,
+    headers: {
+      Authorization: `Bearer ${token}`
+      }
+    })
+
+    setAlbums(data)
+  }
+
   const id = useParams().id
 
   useEffect(() => {
     if (!artist) fetchArtist()
+    if (artist && !albums) fetchTracks()
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [albums, artist])
     
   console.log(artist)
+  console.log(albums)
 
-
-  if (!token || !artist) return null
+  if (!token || !artist || !albums) return null
 
   return (
     <div className="searchPage">
@@ -47,6 +64,15 @@ const ArtistPage = () => {
           ? <p><strong>Genres: </strong>{artist.genres.map(genre => <em key={genre}>{genre} / </em>)}</p>
           : null}
           <p><strong>Followers:  </strong><em>{artist.followers.total}</em></p>
+        </div>
+        <div className="albums">
+            {albums.items.map(album => <div className='album' key={album.id}>
+              {album.images.length > 0
+                ? <img src={album.images[0].url} alt='Artist Logo'/>
+                : <img src={Note} alt='Artist Logo'/>}
+              <h2>{album.name}</h2>
+              <p><strong>Release date: </strong>{album.release_date}</p>
+            </div>)}
         </div>
       </div>
     </div>
