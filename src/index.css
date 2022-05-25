@@ -174,3 +174,72 @@ a:hover {
 .artistList em {
   opacity: 60%;
 }
+
+.generalInfo {
+  display: inline-block;
+  width: 100%;
+  padding: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.generalInfo img {
+  float: left;
+  height: 250px;
+  width: 250px;
+  border-radius: 200px;
+}
+.generalInfo h2 {
+  font-size: 100px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 300px;
+}
+.generalInfo hr {
+  margin-top: 0px;
+  margin-left: 300px;
+  margin-bottom: 35px;
+  width: 60%;
+}
+.generalInfo p {
+  margin-left: 300px;
+  width: 60%;
+}
+.generalInfo em {
+  opacity: 60%;
+}
+
+.albums {
+  display: inline-block;
+  width: 100%;
+  padding: 100px;
+  padding-top: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.albums img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  border-radius: 30px;
+}
+.albums h2 {
+  margin-left:125px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  font-size: 30px;
+}
+.albums p {
+  margin-left:125px;
+  opacity: 60%;
+  margin-top: 0;
+  margin-bottom: 50px;
+}
+
+.album {
+  height: min-content;
+  width: 70%;
+  border: solid black;
+  padding: 3%;
+}
+.album h3 {
+  font-size: 20px;
+  margin-left: 15px;
+}
