@@ -5,6 +5,38 @@ import { useParams } from "react-router-dom"
 import User from '../images/User.png'
 import Note from '../images/Note.png'
 
+const TrackList = (props) => {
+  const [tracks, setTracks] = useState('')
+  const token = useSelector(state => state.token)
+
+  const fetchTracks = async (albumID) => {
+    const {data} = await axios({
+      method: 'get',
+      url: `https://api.spotify.com/v1/albums/${albumID}/tracks`,
+      withCredentials: false,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log(data)
+    setTracks(data)
+  }
+
+  useEffect(() => {
+    fetchTracks(props.id)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.id])
+
+  return(
+    <div>
+      {tracks.items.map(track => <div key={track.id}>
+        <p>{track.name}</p>
+      </div>)}
+    </div>
+  )
+
+}
+
 const ArtistPage = () => {
 
   const [artist, setArtist] = useState('')
@@ -24,7 +56,7 @@ const ArtistPage = () => {
     setArtist(data)
   }
 
-  const fetchTracks = async () => {
+  const fetchAlbums = async () => {
     const {data} = await axios({
       method: 'get',
       url: `https://api.spotify.com/v1/artists/${id}/albums`,
@@ -41,13 +73,10 @@ const ArtistPage = () => {
 
   useEffect(() => {
     if (!artist) fetchArtist()
-    if (artist && !albums) fetchTracks()
+    if (!albums) fetchAlbums()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [albums, artist])
-    
-  console.log(artist)
-  console.log(albums)
 
   if (!token || !artist || !albums) return null
 
@@ -72,6 +101,8 @@ const ArtistPage = () => {
                 : <img src={Note} alt='Artist Logo'/>}
               <h2>{album.name}</h2>
               <p><strong>Release date: </strong>{album.release_date}</p>
+              <h3>Tracks</h3>
+              <TrackList id={album.id}/>
             </div>)}
         </div>
       </div>
