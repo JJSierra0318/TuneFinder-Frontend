@@ -94,7 +94,7 @@ const ArtistPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [albums, artist, similar])
 
-  if (!token || !artist || !albums) return null
+  if (!token || !artist || !albums || !similar) return null
 
   console.log(similar)
 
