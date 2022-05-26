@@ -29,9 +29,9 @@ const TrackList = (props) => {
   if (!tracks) return null
 
   return(
-    <div>
+    <div className='tracks'>
       {tracks.items.map(track => <div key={track.id}>
-        <p>{track.name}</p>
+        <p>- {track.name}</p>
       </div>)}
     </div>
   )
