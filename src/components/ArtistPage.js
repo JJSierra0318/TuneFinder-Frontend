@@ -42,6 +42,7 @@ const ArtistPage = () => {
 
   const [artist, setArtist] = useState('')
   const [albums, setAlbums] = useState('')
+  const [similar, setSimilar] = useState('')
   const token = useSelector(state => state.token)
 
   const fetchArtist = async () => {
@@ -70,16 +71,32 @@ const ArtistPage = () => {
     setAlbums(data)
   }
 
+  const fetchSimilarArtists = async () => {
+    const {data} = await axios({
+      method: 'get',
+      url: `https://api.spotify.com/v1/artists/${id}/related-artists`,
+      withCredentials: false,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    setSimilar(data)
+  }
+
   const id = useParams().id
 
   useEffect(() => {
     if (!artist) fetchArtist()
     if (!albums) fetchAlbums()
+    if(!similar) fetchSimilarArtists()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [albums, artist])
+  }, [albums, artist, similar])
 
   if (!token || !artist || !albums) return null
+
+  console.log(similar)
 
   return (
     <div className="searchPage">
@@ -94,6 +111,12 @@ const ArtistPage = () => {
           ? <p><strong>Genres: </strong>{artist.genres.map(genre => <em key={genre}>{genre} / </em>)}</p>
           : null}
           <p><strong>Followers:  </strong><em>{artist.followers.total}</em></p>
+        </div>
+        <div className="similarArtists">
+          <h3>Similar Artists</h3>
+          {similar.artists.map(artist => <div key={artist.id}>
+            {artist.name}
+          </div>)}
         </div>
         <div className="albums">
             <h3>Albums</h3>
