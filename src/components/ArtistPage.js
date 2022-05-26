@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import User from '../images/User.png'
 import Note from '../images/Note.png'
 
@@ -96,6 +97,12 @@ const ArtistPage = () => {
 
   if (!token || !artist || !albums || !similar) return null
 
+  const refresh = () => {
+    setArtist('')
+    setAlbums('')
+    setSimilar('')
+  }
+
   return (
     <div className="searchPage">
       <div className="search">
@@ -129,7 +136,7 @@ const ArtistPage = () => {
             {artist.images.length > 0
               ? <img src={artist.images[0].url} alt='Artist Logo'/>
               : <img src={User} alt='Artist Logo'/>}
-              <h4>{artist.name}</h4>
+              <Link to={`/artist/${artist.id}`} onClick={() => refresh()}><h4>{artist.name}</h4></Link>
             </center>
           </div>)}
         </div>
