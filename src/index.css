@@ -226,6 +226,11 @@ a:hover {
   margin-top: 0;
   font-size: 30px;
 }
+.albums h3, .similarArtists h3 {
+  margin: 0;
+  margin-bottom: 30px;
+  font-size: 50px;
+}
 .albums p {
   margin-left:125px;
   opacity: 60%;
@@ -237,9 +242,41 @@ a:hover {
   height: min-content;
   width: 70%;
   border: solid black;
+  background-color: #121212;
   padding: 3%;
 }
 .album h3 {
   font-size: 20px;
   margin-left: 15px;
+}
+
+.tracks p {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.similarArtists {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: inline-block;
+  
+  padding: 125px;
+  padding-top: 0;
+  width: 85%;
+}
+
+.sartist {
+  width: 25%;
+  margin: 10px;
+  padding: 50px 0px;
+  float: left;
+  background-color: #121212;
+  border: solid black 2px;
+}
+.sartist p {
+  float: center;
+}
+.sartist img {
+  width: 100px;
+  height: 100px;
+  border-radius: 500px;
 }
