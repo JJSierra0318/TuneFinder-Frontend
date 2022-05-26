@@ -237,6 +237,7 @@ a:hover {
   height: min-content;
   width: 70%;
   border: solid black;
+  background-color: #121212;;
   padding: 3%;
 }
 .album h3 {
