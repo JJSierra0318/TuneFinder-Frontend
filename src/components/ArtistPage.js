@@ -77,7 +77,7 @@ const ArtistPage = () => {
       url: `https://api.spotify.com/v1/artists/${id}/related-artists`,
       withCredentials: false,
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       }
     })
 
@@ -96,8 +96,6 @@ const ArtistPage = () => {
 
   if (!token || !artist || !albums || !similar) return null
 
-  console.log(similar)
-
   return (
     <div className="searchPage">
       <div className="search">
@@ -112,12 +110,6 @@ const ArtistPage = () => {
           : null}
           <p><strong>Followers:  </strong><em>{artist.followers.total}</em></p>
         </div>
-        <div className="similarArtists">
-          <h3>Similar Artists</h3>
-          {similar.artists.map(artist => <div key={artist.id}>
-            {artist.name}
-          </div>)}
-        </div>
         <div className="albums">
             <h3>Albums</h3>
             {albums.items.map(album => <div className='album' key={album.id}>
@@ -129,6 +121,17 @@ const ArtistPage = () => {
               <h3>Tracks</h3>
               <TrackList id={album.id}/>
             </div>)}
+        </div>
+        <div className="similarArtists">
+          <h3>Similar Artists</h3>
+          {similar.artists.map(artist => <div className="sartist" key={artist.id}>
+            <center>
+            {artist.images.length > 0
+              ? <img src={artist.images[0].url} alt='Artist Logo'/>
+              : <img src={User} alt='Artist Logo'/>}
+              <h4>{artist.name}</h4>
+            </center>
+          </div>)}
         </div>
       </div>
     </div>
