@@ -96,6 +96,7 @@ const ArtistPage = () => {
           <p><strong>Followers:  </strong><em>{artist.followers.total}</em></p>
         </div>
         <div className="albums">
+            <h3>Albums</h3>
             {albums.items.map(album => <div className='album' key={album.id}>
               {album.images.length > 0
                 ? <img src={album.images[0].url} alt='Artist Logo'/>
