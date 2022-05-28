@@ -9,6 +9,7 @@ import Menu from './components/Menu';
 import { setUser } from './reducers/userReducer';
 import loginService from './services/login'
 import SearchArtist from './components/SearchArtist';
+import SearchGenre from './components/SearchGenre';
 import ArtistPage from './components/ArtistPage';
 
 
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path='/artist/:id' element={<ArtistPage />}/>
         <Route path='search-artist' element={<SearchArtist />} />
+        <Route path='/search-genre' element={<SearchGenre />} />
         <Route path='/' element={<></>} />
       </Routes>
     </Router>
