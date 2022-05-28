@@ -4,10 +4,10 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import User from '../images/User.png'
 
-const ArtistList = (artists) => {
+const ArtistList = ({artists}) => {
   return (
     <div>
-      {artists.artists.map(artist => <div className='artistList' key={artist.id}>
+      {artists.map(artist => <div className='artistList' key={artist.id}>
         {artist.images.length > 0
           ? <img src={artist.images[2].url} alt='Artist Logo'/>
           : <img src={User} alt='Artist Logo'/>}
