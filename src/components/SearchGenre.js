@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import User from '../images/User.png'
 
 const ArtistList = ({artists}) => {
@@ -11,7 +12,7 @@ const ArtistList = ({artists}) => {
         {artist.images.length > 0
           ? <img src={artist.images[2].url} alt='Artist Logo'/>
           : <img src={User} alt='Artist Logo'/>}
-        <h2>{artist.name}</h2>
+        <Link to={`/artist/${artist.id}`}><h2>{artist.name}</h2></Link>
         <hr></hr>
         {artist.genres.length > 0
           ? <p><strong>Genres: </strong>{artist.genres.map(genre => <em key={genre}>{genre} / </em>)}</p>
