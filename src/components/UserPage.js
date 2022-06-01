@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import User from '../images/User.png'
 
 const UserPage = () => {
 
@@ -32,8 +33,15 @@ const UserPage = () => {
   console.log(playlists)
 
   return(
-    <div>
-      HELLO
+    <div className="searchPage">
+      <div className="search">
+        <div className="userInfo">
+          {user.images.length > 0
+            ? <img src={user.images[0].url} alt="User logo"/>
+            : <img src={User} alt="User logo"/>}
+          <h2>{user.display_name}</h2>
+        </div>
+      </div>
     </div>
   )
 }
