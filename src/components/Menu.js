@@ -20,7 +20,7 @@ const Menu = () => {
           <Link style={padding} to='/'>Logout</Link>
       </button>
 
-      {user ? <button id='right'>{user.display_name}</button> : null}
+      {user ? <button id='right'><Link to='/user'>{user.display_name}</Link></button> : null}
     </div>
   )
 }
