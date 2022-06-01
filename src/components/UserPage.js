@@ -6,9 +6,9 @@ import User from '../images/User.png'
 const UserPage = () => {
 
   const [playlists, setPlaylists] = useState('')
+  const [following, setFollowing] = useState('')
   const user = useSelector(state => state.user)
   const token = useSelector(state => state.token)
-  console.log(user)
 
   const fetchUser = async () => {
     const {data} = await axios({
@@ -23,8 +23,22 @@ const UserPage = () => {
     setPlaylists(data)
   }
 
+  const fetchFollowed = async () => {
+    const {data} = await axios({
+      method: 'get',
+      url: 'https://api.spotify.com/v1/me/following?type=artist',
+      withCredentials: false,
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    
+    setFollowing(data)
+  }
+
   useEffect(() => {
     if (!playlists) fetchUser()
+    if (!following) fetchFollowed()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlists])
 
@@ -40,6 +54,8 @@ const UserPage = () => {
             ? <img src={user.images[0].url} alt="User logo"/>
             : <img src={User} alt="User logo"/>}
           <h2>{user.display_name}</h2>
+          <p><strong>Followers: </strong>{user.followers.total}</p>
+          <p><strong>Followed: </strong>{following.artists.total}</p>
         </div>
       </div>
     </div>

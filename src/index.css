@@ -299,3 +299,11 @@ a:hover {
   width: 200px;
   border-radius: 200px;
 }
+.userInfo p {
+  font-size: 100%;
+  margin-top: 1.5%;
+  margin-bottom: 0;
+  margin-left: 300px;
+  width: 60%;
+  opacity: 60%;
+}

@@ -29,7 +29,7 @@ const LogIn = (props) => {
   const REDIRECT_URI = "http://localhost:3000/home"
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
   const RESPONSE_TYPE = 'token'
-  const SCOPE = 'user-read-private playlist-read-private user-read-currently-playing'
+  const SCOPE = 'user-read-private playlist-read-private user-read-currently-playing user-follow-read'
 
   return (
     <div className="login">
