@@ -11,6 +11,7 @@ import loginService from './services/login'
 import SearchArtist from './components/SearchArtist';
 import SearchGenre from './components/SearchGenre';
 import ArtistPage from './components/ArtistPage';
+import UserPage from './components/UserPage';
 
 
 const getUser = async (token, dispatch) => {
@@ -57,6 +58,7 @@ const App = () => {
         <Route path='/artist/:id' element={<ArtistPage />}/>
         <Route path='search-artist' element={<SearchArtist />} />
         <Route path='/search-genre' element={<SearchGenre />} />
+        <Route path='/user' element={<UserPage />} />
         <Route path='/' element={<></>} />
       </Routes>
     </Router>
