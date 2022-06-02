@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import User from '../images/User.png'
+import Note from '../images/Note.png'
 
 const UserPage = () => {
 
@@ -18,6 +19,9 @@ const UserPage = () => {
       withCredentials: false,
       headers: {
         Authorization: `Bearer ${token}`
+      },
+      params: {
+        limit: 50
       }
     })
 
@@ -59,9 +63,6 @@ const UserPage = () => {
 
   if (!token || !following || !playing) return null
 
-  console.log(playlists)
-  console.log(playing)
-
   return(
     <div className="searchPage">
       <div className="search">
@@ -73,6 +74,18 @@ const UserPage = () => {
           <p><strong>Most recently played: </strong>{playing.item.name}</p>
           <p><strong>Followers: </strong>{user.followers.total}</p>
           <p><strong>Followed: </strong>{following.artists.total}</p>
+        </div>
+        <div className="userPlaylists">
+            <h3>Playlists</h3>
+            {playlists.items.map(playlist => <div className="userPlaylist" key={playlist.id}>
+              <center>
+                {playlist.images.length > 0
+                  ? <img src={playlist.images[0].url} alt='Album logo'/>
+                  : <img src={Note} alt='Album logo' />}
+                  <h4>{playlist.name}</h4>
+                  <p>{playlist.tracks.total} tracks</p>
+              </center>
+            </div>)}
         </div>
       </div>
     </div>
