@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useSelector } from "react-redux"
 import ArtistList from "./SearchResult/ArtistList"
+import TrackList from "./SearchResult/TrackList"
 
 const SearchGenre = () => {
 
@@ -25,11 +26,24 @@ const SearchGenre = () => {
       },
       params: {
         q: `genre:${search}`,
-        type: 'artist'
+        type: filter
       }
     })
     
-    setArtists(data.artists.items)
+    switch(filter) {
+      case 'artist':
+        setArtists(data.artists.items)
+        break
+      case 'track':
+        console.log(data)
+        setTracks(data.tracks.items)
+        break
+      case 'playlist':
+        console.log('playlist')
+        break
+      default:
+        setArtists(data.artists.items)
+    }
   }
 
   if (!token) return null
@@ -58,6 +72,9 @@ const SearchGenre = () => {
         </center>
         {filter === 'artist' && artists
           ? <ArtistList artists={artists} />
+          : null}
+        {filter === 'track' && tracks
+          ? <TrackList tracks={tracks}/>
           : null}
       </div>
     </div>
