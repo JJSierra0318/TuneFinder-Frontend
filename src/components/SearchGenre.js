@@ -6,47 +6,59 @@ import ArtistList from "./SearchResult/ArtistList"
 const SearchGenre = () => {
 
   const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState('artist')
+
   const [artists, setArtists] = useState('')
+  const [tracks, setTracks] = useState('')
+  const [playlists, setPlaylists] = useState('')
   const token = useSelector(state => state.token)
 
   const onSubmit = async (e) => {
 
     e.preventDefault()
-    const {data} = await axios({
+    const { data } = await axios({
       method: 'get',
       url: 'https://api.spotify.com/v1/search',
       withCredentials: false,
-    headers: {
-      Authorization: `Bearer ${token}`
+      headers: {
+        Authorization: `Bearer ${token}`
       },
       params: {
         q: `genre:${search}`,
         type: 'artist'
       }
     })
+    
     setArtists(data.artists.items)
   }
 
   if (!token) return null
 
-  return(
+  return (
     <div className="searchPage">
       <div className="search">
         <center>
           <h1>Find By Genre</h1>
           <form onSubmit={onSubmit}>
+            <div className="filter">
+              <center>
+                <button onClick={() => setFilter('artist')}>Artists</button>
+                <button onClick={() => setFilter('track')}>Tracks</button>
+                <button onClick={() => setFilter('playlist')}>Playlists</button>
+              </center>
+            </div>
             <div className="input">
-            <input
-              placeholder="Genre name"
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button type="submit">Search</button>
+              <input
+                placeholder="Genre name"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button type="submit">Search</button>
             </div>
           </form>
         </center>
-        {artists 
-        ? <ArtistList artists={artists} />
-        : null}
+        {filter === 'artist' && artists
+          ? <ArtistList artists={artists} />
+          : null}
       </div>
     </div>
   )
