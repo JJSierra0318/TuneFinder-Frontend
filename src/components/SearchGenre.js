@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useSelector } from "react-redux"
 import ArtistList from "./SearchResult/ArtistList"
 import TrackList from "./SearchResult/TrackList"
+import PlaylistList  from "./SearchResult/PlaylistList"
 
 const SearchGenre = () => {
 
@@ -16,6 +17,10 @@ const SearchGenre = () => {
 
   const onSubmit = async (e) => {
 
+    let q
+    if (filter === 'playlist') q = search
+    else q = `genre:${search}`
+
     e.preventDefault()
     const { data } = await axios({
       method: 'get',
@@ -25,7 +30,7 @@ const SearchGenre = () => {
         Authorization: `Bearer ${token}`
       },
       params: {
-        q: `genre:${search}`,
+        q: q,
         type: filter
       }
     })
@@ -35,11 +40,10 @@ const SearchGenre = () => {
         setArtists(data.artists.items)
         break
       case 'track':
-        console.log(data)
         setTracks(data.tracks.items)
         break
       case 'playlist':
-        console.log('playlist')
+        setPlaylists(data.playlists.items)
         break
       default:
         setArtists(data.artists.items)
@@ -75,6 +79,9 @@ const SearchGenre = () => {
           : null}
         {filter === 'track' && tracks
           ? <TrackList tracks={tracks}/>
+          : null}
+        {filter === 'playlist' && playlists
+          ? <PlaylistList playlists={playlists} />
           : null}
       </div>
     </div>
