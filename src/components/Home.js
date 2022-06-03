@@ -14,7 +14,7 @@ const Home = (props) => {
           <Link to='/search-genre'><button>Search</button></Link>
           </div>
         <div>
-          <h1>Search by artist</h1>
+          <h1>Find by artist</h1>
           <Link to='/search-artist'><button>Search</button></Link>
           </div>
         </center>
