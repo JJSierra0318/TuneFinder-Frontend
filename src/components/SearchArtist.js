@@ -25,7 +25,7 @@ const SearchArtist = () => {
         Authorization: `Bearer ${loggedIn}`
       },
       params: {
-        q: search,
+        q: `artist:${search}`,
         type: filter
       }
     })
@@ -50,7 +50,7 @@ const SearchArtist = () => {
     <div className='searchPage'>
       <div className='search'>
         <center>
-          <h1>Find by Name</h1>
+          <h1>Find by Artist</h1>
           <form onSubmit={onSubmit}>
             <div className="filter">
               <center>
