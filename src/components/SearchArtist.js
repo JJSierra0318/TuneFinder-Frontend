@@ -20,7 +20,7 @@ const SearchArtist = () => {
 
     let q
     if (filter === 'playlist') q = search
-    else q = `genre:${search}`
+    else q = `artist:${search}`
 
     e.preventDefault()
     const { data } = await axios({

@@ -61,7 +61,7 @@ const UserPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlists])
 
-  if (!token || !following || !playing) return null
+  if (!token || !following || !playing || !playlists) return null
 
   return(
     <div className="searchPage">
