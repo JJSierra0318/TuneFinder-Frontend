@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import User from '../images/User.png'
 import Note from '../images/Note.png'
+import Star from '../images/Star.png'
+import StarPress from '../images/StarPress.png'
 
 const TrackList = (props) => {
   const [tracks, setTracks] = useState('')
@@ -44,6 +46,7 @@ const ArtistPage = () => {
   const [artist, setArtist] = useState('')
   const [albums, setAlbums] = useState('')
   const [similar, setSimilar] = useState('')
+  const [img, setImg] = useState(Star)
   const token = useSelector(state => state.token)
 
   const fetchArtist = async () => {
@@ -103,6 +106,11 @@ const ArtistPage = () => {
     setSimilar('')
   }
 
+  const onFavorite = () => {
+    if (img === Star) setImg(StarPress)
+    else setImg(Star)
+  }
+
   return (
     <div className="searchPage">
       <div className="search">
@@ -110,7 +118,7 @@ const ArtistPage = () => {
         {artist.images.length > 0
           ? <img src={artist.images[0].url} alt='Artist Logo'/>
           : <img src={User} alt='Artist Logo'/>}
-          <h2>{artist.name}</h2>
+          <h2>{artist.name}<span className="favButton"><button onClick={() => onFavorite()}><img src={img} alt=''/></button></span></h2>
           <hr />
           {artist.genres.length > 0
           ? <p><strong>Genres: </strong>{artist.genres.map(genre => <em key={genre}>{genre} / </em>)}</p>
