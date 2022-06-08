@@ -21,6 +21,7 @@ const Menu = () => {
       </button>
 
       {user ? <button id='right'><Link to='/user'>{user.display_name}</Link></button> : null}
+      {user ? <button id='right'><Link to='/favorite'>Favorites</Link></button> : null}
     </div>
   )
 }
