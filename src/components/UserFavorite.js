@@ -1,6 +1,8 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import favoriteService from "../services/favorites"
+import ArtistList from "./SearchResult/ArtistList"
 
 const UserFavorite = () => {
 
@@ -8,20 +10,37 @@ const UserFavorite = () => {
   const token = useSelector(state => state.token)
   const user = useSelector(state => state.user)
 
+  const fetchFavorites = async favorites => {
+
+    const { data } = await axios({
+      method: 'get',
+      url: 'https://api.spotify.com/v1/artists',
+      withCredentials: false,
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        ids: favorites.toString()
+      }
+    })
+
+    setFavorites(data.artists)
+  }
+
   useEffect(() => {
-    favoriteService.getFavorites({ username: user.display_name }).then(favorites => setFavorites(favorites))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    favoriteService.getFavorites({ username: user.display_name }).then(favorites => fetchFavorites(favorites))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (!token || !user || favorites.length < 1) return null
-
-  console.log(favorites)
+  if (!token || !user || !favorites) return null
 
   return (
     <div className="searchPage">
       <div className="search">
-        <h2>Favorite Artists</h2>
-        {}
+        <center>
+          <h2 className="title">Favorite Artists</h2>
+        </center>
+        <ArtistList artists={favorites} />
       </div>
     </div>
   )
