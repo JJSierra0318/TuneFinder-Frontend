@@ -49,6 +49,7 @@ const ArtistPage = () => {
   const [similar, setSimilar] = useState('')
   const [img, setImg] = useState(Star)
   const token = useSelector(state => state.token)
+  const user = useSelector(state => state.user)
 
   const fetchArtist = async () => {
     const {data} = await axios({
@@ -110,8 +111,7 @@ const ArtistPage = () => {
   const onFavorite = async () => {
     if (img === Star) {
       setImg(StarPress)
-      console.log(artist.id)
-      await favoriteService.saveFavorite(artist.id)
+      await favoriteService.saveFavorite({artist: artist.id, user: {id: user.id, username: user.display_name, uri: user.uri}})
     }
     else setImg(Star)
   }
