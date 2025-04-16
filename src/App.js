@@ -27,7 +27,7 @@ const getUser = async (token, dispatch) => {
   })
   
   dispatch(setUser(data))
-  await loginService.login(data)
+  // await loginService.login(data)
   return data
 }
 
