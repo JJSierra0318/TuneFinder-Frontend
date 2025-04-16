@@ -13,6 +13,7 @@ import SearchGenre from './components/SearchGenre';
 import ArtistPage from './components/ArtistPage';
 import UserPage from './components/UserPage';
 import UserFavorite from './components/UserFavorite';
+import Callback from './components/Callback';
 
 
 const getUser = async (token, dispatch) => {
@@ -43,8 +44,6 @@ const App = () => {
 
   }, [token, user, dispatch])
 
-  window.onbeforeunload = () => localStorage.clear()
-
   return (
     <Router>
       <div>
@@ -55,6 +54,7 @@ const App = () => {
       </div>
 
       <Routes>
+      <Route path="/callback" element={<Callback />} />
         <Route path="/home" element={<Home />} />
         <Route path='/artist/:id' element={<ArtistPage />}/>
         <Route path='search-artist' element={<SearchArtist />} />

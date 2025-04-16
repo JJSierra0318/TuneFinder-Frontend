@@ -26,9 +26,9 @@ const LogIn = (props) => {
 
 
   const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
-  const REDIRECT_URI = "http://localhost:3000/home"
+  const REDIRECT_URI = "http://localhost:3000/callback"
   const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
-  const RESPONSE_TYPE = 'token'
+  const RESPONSE_TYPE = 'code'
   const SCOPE = 'user-read-private playlist-read-private user-read-currently-playing user-follow-read'
 
   return (
