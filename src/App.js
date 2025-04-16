@@ -7,7 +7,6 @@ import LogIn from "./components/LogIn";
 import Home from "./components/Home";
 import Menu from './components/Menu';
 import { setUser } from './reducers/userReducer';
-import loginService from './services/login'
 import SearchArtist from './components/SearchArtist';
 import SearchGenre from './components/SearchGenre';
 import ArtistPage from './components/ArtistPage';
@@ -27,7 +26,6 @@ const getUser = async (token, dispatch) => {
   })
   
   dispatch(setUser(data))
-  // await loginService.login(data)
   return data
 }
 

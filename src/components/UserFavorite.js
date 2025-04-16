@@ -1,7 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import favoriteService from "../services/favorites"
 import ArtistList from "./SearchResult/ArtistList"
 
 const UserFavorite = () => {
@@ -26,11 +25,6 @@ const UserFavorite = () => {
 
     setFavorites(data.artists)
   }
-
-  useEffect(() => {
-    favoriteService.getFavorites({ username: user.display_name }).then(favorites => fetchFavorites(favorites))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   if (!token || !user || !favorites) return null
 

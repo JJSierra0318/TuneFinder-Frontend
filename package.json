@@ -26,7 +26,6 @@
     "nth-check": "^2.1.1",
     "postcss": "^8.4.38"
   },
-  "proxy": "http://localhost:3001",
   "scripts": {
   "start": "react-app-rewired start",
   "build": "react-app-rewired build",

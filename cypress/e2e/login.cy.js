@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 describe('Spotify Login Page', () => {
   beforeEach(() => {
-    // Clear localStorage to simulate fresh login
     cy.clearLocalStorage();
     cy.visit('/');
   });

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
-import favoriteService from "../services/favorites"
 import User from '../images/User.png'
 import Note from '../images/Note.png'
 import Star from '../images/Star.png'
@@ -111,7 +110,6 @@ const ArtistPage = () => {
   const onFavorite = async () => {
     if (img === Star) {
       setImg(StarPress)
-      await favoriteService.saveFavorite({artist: artist.id, user: {id: user.id, username: user.display_name, uri: user.uri}})
     }
     else setImg(Star)
   }
