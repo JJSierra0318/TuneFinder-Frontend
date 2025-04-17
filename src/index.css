@@ -35,7 +35,9 @@ a:hover {
   color: #1DB954
 }
 
-
+.menu button:hover {
+  color: #1DB954
+}
 
 .menu {
   color: white;

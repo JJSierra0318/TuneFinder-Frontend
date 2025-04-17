@@ -37,7 +37,10 @@ describe('Home page', () => {
   });
 
   it('should allow user to logout', () => {
-    cy.contains('Logout').click()
-    cy.contains('Login with Spotify')
+    cy.get('.logout-button').click();
+    cy.contains('Login with Spotify');
+    cy.window().then(win => {
+      expect(win.localStorage.getItem('token')).to.eq('');
+    });
   });
 });

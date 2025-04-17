@@ -107,12 +107,62 @@ describe('Search Artist', () => {
     cy.get('form').submit();
     cy.wait('@getTracks').its('response.statusCode').should('eq', 200);
 
-    // Check if the BYOB track is displayed after the request
-    cy.contains('BYOB', { timeout: 10000 }).should('be.visible');
-
     cy.contains('BYOB');
     cy.contains('Chop');
     cy.contains('Tox');
+    cy.get('img').should('have.length', 2);
+  })
+
+  it('should find playlists with input', () => {
+
+    cy.intercept('GET', 'https://api.spotify.com/v1/search?q=*&type=playlist', {
+      statusCode: 200,
+      body: {
+        playlists: {
+          items: [
+            {
+              id: '1',
+              images: [],
+              name: 'SOAD2025',
+              owner: {
+                display_name: 'Sierra'
+              },
+              external_urls: {
+                spotify: 'url'
+              },
+              tracks: {
+                total: 10
+              }
+            },
+            {
+              id: '2',
+              images: [],
+              name: 'SysOAD',
+              owner: {
+                display_name: 'Juan'
+              },
+              external_urls: {
+                spotify: 'url'
+              },
+              tracks: {
+                total: 15
+              }
+            }
+          ]
+        }
+      },
+    }).as('getPlaylists');
+
+    cy.contains('Playlists').click();
+    cy.get('input').type('SOAD');
+    cy.get('form').submit();
+    cy.wait('@getPlaylists').its('response.statusCode').should('eq', 200);
+
+    cy.contains('Sierra');
+    cy.contains('SOAD2025');
+    cy.contains('SysOAD');
+    cy.contains('10');
+    cy.contains('Juan');
     cy.get('img').should('have.length', 2);
   })
 });

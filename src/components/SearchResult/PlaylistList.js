@@ -2,9 +2,10 @@
 import User from '../../images/User.png'
 
 const PlaylistList = ({playlists}) => {
+  console.log(playlists)
   return(
     <div>
-      {playlists.map(playlist => <div className="artistList" key={playlist.id}>
+      {playlists.filter(Boolean).map(playlist => <div className="artistList" key={playlist.id}>
         {playlist.images.length > 0
           ? <img src={playlist.images[0].url} alt='playlist logo'/>
           : <img src={User} alt='playlist logo'/>}
