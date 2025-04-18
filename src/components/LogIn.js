@@ -1,49 +1,62 @@
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { userLogin } from "../reducers/tokenReducer"
+import { useEffect, useState } from "react";
 
-const LogIn = (props) => {
-
-  const dispatch = useDispatch()
+const LogIn = () => {
+  const [loginUrl, setLoginUrl] = useState("");
 
   useEffect(() => {
+    const generateCodeVerifier = () => {
+      const array = new Uint32Array(56);
+      window.crypto.getRandomValues(array);
+      return Array.from(array, dec => ('0' + dec.toString(16)).slice(-2)).join('');
+    };
 
-    const hash = window.location.hash
-    let token = window.localStorage.getItem('token')
+    const generateCodeChallenge = async (verifier) => {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(verifier);
+      const digest = await window.crypto.subtle.digest('SHA-256', data);
+      return btoa(String.fromCharCode(...new Uint8Array(digest)))
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=+$/, '');
+    };
 
-    if (!token && hash) {
-      let urlParams = new URLSearchParams(window.location.hash.replace('#','?'))
-      let token = urlParams.get('access_token')
+    const setupLogin = async () => {
+      const codeVerifier = generateCodeVerifier();
+      const codeChallenge = await generateCodeChallenge(codeVerifier);
 
-      window.location.hash = ''
-      window.localStorage.setItem('token',token)
-    }
+      localStorage.setItem("code_verifier", codeVerifier);
 
-    dispatch(userLogin(token))
+      const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee';
+      const REDIRECT_URI = "http://localhost:3000/callback";
+      const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize';
+      const RESPONSE_TYPE = 'code';
+      const SCOPE = 'user-read-private playlist-read-private user-read-currently-playing user-follow-read';
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+      const url = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}` +
+                  `&response_type=${RESPONSE_TYPE}` +
+                  `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+                  `&scope=${encodeURIComponent(SCOPE)}` +
+                  `&code_challenge_method=S256` +
+                  `&code_challenge=${codeChallenge}`;
 
+      setLoginUrl(url);
+    };
 
-  const CLIENT_ID = '5c2e53056c7e4287bf2c92c8edf7a6ee'
-  const REDIRECT_URI = "http://localhost:3000/callback"
-  const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
-  const RESPONSE_TYPE = 'code'
-  const SCOPE = 'user-read-private playlist-read-private user-read-currently-playing user-follow-read'
+    setupLogin();
+  }, []);
 
   return (
     <div className="login">
       <center>
         <h1>Log In to Continue</h1>
-        <div>
-          <a 
-            href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}`}>
+        {loginUrl && (
+          <a href={loginUrl}>
             Login with Spotify
           </a>
-        </div>
+        )}
       </center>
     </div>
-  )
-}
+  );
+};
 
-export default LogIn
+export default LogIn;

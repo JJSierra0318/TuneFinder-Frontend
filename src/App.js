@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ import Callback from './components/Callback';
 
 
 const getUser = async (token, dispatch) => {
-  const {data} = await axios({
+  const { data } = await axios({
     method: 'get',
     url: 'https://api.spotify.com/v1/me',
     withCredentials: false,
@@ -24,7 +24,7 @@ const getUser = async (token, dispatch) => {
       Authorization: `Bearer ${token}`
     }
   })
-  
+
   dispatch(setUser(data))
   return data
 }
@@ -36,6 +36,10 @@ const App = () => {
   const user = useSelector(state => state.user)
 
   useEffect(() => {
+    const localToken = localStorage.getItem('token')
+    if (localToken && !token) {
+      dispatch({ type: 'SET_TOKEN', data: localToken })
+    }
     if (token && !user) {
       getUser(token, dispatch)
     }
@@ -46,19 +50,19 @@ const App = () => {
     <Router>
       <div>
         {token
-        ? <Menu />
-        : <LogIn />}
-        
+          ? <Menu />
+          : <LogIn />}
+
       </div>
 
       <Routes>
-      <Route path="/callback" element={<Callback />} />
+        <Route path="/callback" element={<Callback />} />
         <Route path="/home" element={<Home />} />
-        <Route path='/artist/:id' element={<ArtistPage />}/>
+        <Route path='/artist/:id' element={<ArtistPage />} />
         <Route path='search-artist' element={<SearchArtist />} />
         <Route path='/search-genre' element={<SearchGenre />} />
         <Route path='/user' element={<UserPage />} />
-        <Route path='/favorite' element={<UserFavorite />}/>
+        <Route path='/favorite' element={<UserFavorite />} />
         <Route path='/' element={<></>} />
       </Routes>
     </Router>

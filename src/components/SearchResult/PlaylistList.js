@@ -2,7 +2,6 @@
 import User from '../../images/User.png'
 
 const PlaylistList = ({playlists}) => {
-  console.log(playlists)
   return(
     <div>
       {playlists.filter(Boolean).map(playlist => <div className="artistList" key={playlist.id}>

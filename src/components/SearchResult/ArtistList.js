@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import User from '../../images/User.png'
 
 const ArtistList = ({artists}) => {
-  console.log('here')
   return (
     <div>
       {artists.map(artist => <div className='artistList' key={artist.id}>
