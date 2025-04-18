@@ -1,10 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import TrackList from '../../components/SearchResult/TrackList';
 
 jest.mock('react-router-dom', () => ({
-  BrowserRouter: ({ children }) => <div>{children}</div>, // Reemplaza el BrowserRouter con un div normal
-  Link: ({ children }) => <span>{children}</span>, // Si también usas Link, puedes mockearlo así
+  BrowserRouter: ({ children }) => <div>{children}</div>,
+  Link: ({ children }) => <span>{children}</span>,
 }));
 
 jest.mock('../../images/Note.png', () => 'note.png');
@@ -45,14 +46,16 @@ describe('TrackList', () => {
     expect(screen.getByText(/Test Album/)).toBeInTheDocument();
     expect(screen.getByText(/No Image Album/)).toBeInTheDocument();
 
-    expect(screen.getByText('Artist One')).toBeInTheDocument();
-    expect(screen.getByText('Artist Two')).toBeInTheDocument();
-    expect(screen.getByText('Solo Artist')).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes('Artist One'))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes('Artist Two'))).toBeInTheDocument();
+    expect(screen.getByText((content) => content.includes('Solo Artist'))).toBeInTheDocument();
 
     expect(screen.getByText('3:35 min')).toBeInTheDocument();
     expect(screen.getByText('1:30 min')).toBeInTheDocument();
 
-    expect(screen.getByAltText('album logo').src).toBe('https://example.com/image.jpg');
+    const albumImages = screen.getAllByAltText('album logo');
+    expect(albumImages[0].src).toBe('https://example.com/image.jpg');
+    expect(albumImages[1].src).toContain('note.png');
 
     const fallbackImage = screen.getAllByAltText('album logo')[1];
     expect(fallbackImage.src).toContain('note.png');
